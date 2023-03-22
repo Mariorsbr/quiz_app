@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:12.2-alpine
+    container_name: "quizdatabase"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD} 
+    # networks:
+    #   - fullstack
+    volumes:
+      - db_postgres:/var/lib/postgres/data  
+
+  # api:
+  #     build: .
+  #     container_name: "quiz_api"
+  #     environment:
+  #         DB_USERNAME: ${POSTGRES_USER}
+  #         DB_PASSWORD: ${POSTGRES_PASSWORD}
+  #         DB_DB: ${POSTGRES_DB}
+  #         DB_HOST: "db"
+  #         DB_TABLE: "postgres"
+  #         DB_PORT: "5432"
+  #     ports :
+  #       - "5000:5000"
+  #     depends_on:
+  #       - db 
+  #     networks:
+  #       - fullstack  
+        
+volumes:
+  db_postgres:
+
+# networks:
+#   fullstack:
+#     driver: bridge
